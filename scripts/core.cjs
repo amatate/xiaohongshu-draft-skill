@@ -22,6 +22,7 @@ function allowRequest(method,url,{upload=false}={}){
  if(/\/(?:web_api\/sns\/v\d+\/note|api\/sns\/web\/v\d+\/(?:publish|note)|api\/galaxy\/creator\/note\/publish)(?:\/|$)/i.test(p))return false;
  if(['GET','HEAD','OPTIONS'].includes(method))return true;
  if(method==='PUT'&&upload&&['ros-upload.xiaohongshu.com','ros-upload-d4.xhscdn.com'].includes(u.hostname))return true;
+ if(method==='POST'&&upload&&['ros-upload.xiaohongshu.com','ros-upload-d4.xhscdn.com'].includes(u.hostname)&&/^\/spectrum\/[A-Za-z0-9_-]+$/.test(p))return true;
  return method==='POST'&&WRITE_READS.has(u.hostname+p);
 }
 async function installGuards(context,{isUploading=()=>false}={}){

@@ -4,13 +4,17 @@
 
 The underlying guided workflow successfully created two one-image drafts, reopened each, inspected the correct image, read title/body and AI declaration, and handed the same profile to the user. The user later reported publication. The automation never pressed Publish. This is evidence for the workflow, **not** a claim that this rewritten CLI has passed unattended live-site acceptance.
 
-Current package verification is isolated Node tests and real headless Chromium against a synthetic local fixture. No private artwork, accounts, profile, tokens, signed asset URLs or real-site screenshots belong in this repository. Real-site smoke tests require a new explicit scope and should begin with one disposable authorized draft, not a bulk run.
+A later supervised live batch reused this package’s core and UI modules through a private runner, with additional upload-completion waits, settling time and per-draft visual review. It exposed multipart-upload and image-preview timing differences now covered by regression tests. This is still not unattended acceptance of the public CLI.
+
+Current automated package verification is isolated Node tests and real headless Chromium against a synthetic local fixture. No private artwork, accounts, profile, tokens, signed asset URLs or real-site screenshots belong in this repository. Real-site smoke tests require a new explicit scope and should begin with one disposable authorized draft, not a bulk run.
 
 ## What failed, and the narrower repair
 
 | Failure | Observed cause or limit | Repair |
 | --- | --- | --- |
 | A script's `--test` appeared to succeed without a draft | It filled the editor, waited, then closed; it did not save and reopen | Require actual list + reopen + content verification. Do not use a return value as proof. |
+| Reopened editor was captured before its image decoded | A draft count and title can be present while the preview is still empty | Require the observed preview image to finish loading with positive dimensions, then visually compare it with the original. Missing or broken previews fail validation. |
+| Multipart upload was blocked | Some observed uploads used POST rather than PUT on the first-party upload service | Allow POST only during upload, on the two observed exact hosts and a single `/spectrum/` object path; keep unknown writes and publication routes blocked. |
 | Upload stalled under a safety gate | The image PUT used a different first-party CDN host from the first observed host | Inspect blocked method/host/path, then narrowly allow the observed upload destination; never blanket-allow writes. |
 | Topic search returned no results | Read-like topic searches used POST routes blocked by the strict gate | Classify observed routes, not “POST means publish.” Preserve deny-by-default for unknown routes. |
 | A topic query polluted the artwork URL | Platform-dependent cursor shortcuts failed, and `#query` was ordinary text, not a real topic | Verify body exactly after normalization; require real topic tokens. This v0.1 intentionally leaves topics to the user. |

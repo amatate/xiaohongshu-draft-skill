@@ -10,7 +10,7 @@ async function one(loc,label){if(await loc.count()!==1)throw Error('Ambiguous/mi
 async function visible(loc){const out=[];for(const l of await loc.all())if(await l.isVisible())out.push(l);return out;}
 async function waitFor(check,message,timeout=10000){const end=Date.now()+timeout;do{if(await check())return;await new Promise(r=>setTimeout(r,150));}while(Date.now()<end);throw Error(message);}
 class XhsUI{
- constructor(page,{stabilizeMs=1800}={}){this.page=page;this.stabilizeMs=stabilizeMs;}
+ constructor(page,{stabilizeMs=1800,previewTimeoutMs=20000}={}){this.page=page;this.stabilizeMs=stabilizeMs;this.previewTimeoutMs=previewTimeoutMs;}
  async list(){
   const p=this.page;await p.goto(UPLOAD,{waitUntil:'domcontentloaded'});
   await p.getByText(/^草稿箱\(\d+\)$/).waitFor({state:'visible'});await humanCheck(p);
@@ -52,6 +52,8 @@ class XhsUI{
   if(post.aiGenerated?(ai.length===0||chooser.length>0):ai.length>0)throw Error('AI declaration mismatch');
   // This proves image count, NOT pixel identity. Screenshot review is mandatory.
   const count=await visible(this.page.getByText(/^1\s*\/\s*18$/));if(count.length!==1)throw Error('Expected exactly one image in editor');
+  const image=await one(this.page.locator('#creator-preview-image-0'),'reopened image preview');
+  await waitFor(()=>image.evaluate(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0),'Image preview did not finish loading; do not accept blank screenshots',this.previewTimeoutMs);
  }
  async saveAndReopen(post){
   await this.verify(post);

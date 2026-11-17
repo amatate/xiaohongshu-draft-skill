@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Xiaohongshu Draft Skill</title>
+  <desc id="desc">Local-first drafts. Verified before handoff. You decide when to publish.</desc>
+  <rect width="1200" height="420" rx="28" fill="#111b25"/>
+  <path d="M795 0h405v420H960Z" fill="#172b32"/>
+  <circle cx="1110" cy="75" r="180" fill="#1c383c"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="64" y="72" fill="#8cdbbe" font-size="15" font-weight="700" letter-spacing="4">LOCAL FIRST · HUMAN IN CONTROL</text>
+    <text x="60" y="146" fill="#f4f6f4" font-size="48" font-weight="700">Xiaohongshu</text>
+    <text x="60" y="204" fill="#f4f6f4" font-size="48" font-weight="700">Draft Skill</text>
+    <text x="64" y="252" fill="#b6c7ce" font-size="20">Prepare. Reopen. Verify. Hand off.</text>
+    <rect x="64" y="301" width="164" height="38" rx="19" fill="#28483f"/>
+    <text x="146" y="326" text-anchor="middle" fill="#abebce" font-size="14" font-weight="700">DRAFTS ONLY</text>
+    <text x="248" y="326" fill="#b6c7ce" font-size="15">Skill + Playwright CLI</text>
+  </g>
+  <g transform="translate(785 83)">
+    <rect x="28" y="18" width="246" height="259" rx="16" fill="#25474c"/>
+    <rect width="246" height="259" rx="16" fill="#f2f3e9"/>
+    <rect x="22" y="23" width="202" height="113" rx="8" fill="#d2e2d5"/>
+    <path d="M22 117l60-54 54 47 34-27 54 38v15H22Z" fill="#7caa90"/>
+    <circle cx="185" cy="54" r="13" fill="#e6b66c"/>
+    <rect x="22" y="159" width="143" height="9" rx="4" fill="#35534c"/>
+    <rect x="22" y="181" width="201" height="6" rx="3" fill="#afc1b7"/>
+    <rect x="22" y="197" width="166" height="6" rx="3" fill="#afc1b7"/>
+    <rect x="22" y="222" width="88" height="19" rx="9" fill="#d7e7da"/>
+    <path d="M35 231l4 4 8-9" fill="none" stroke="#46785d" stroke-width="2"/>
+    <text x="56" y="235" font-family="Arial, sans-serif" font-size="10" fill="#35534c">AI label</text>
+    <circle cx="237" cy="225" r="34" fill="#8cdbbe"/>
+    <path d="M221 225l11 11 22-24" fill="none" stroke="#143c30" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+node_modules/
+.state/
+profiles/
+evidence/
+*.log
+.env*
+.DS_Store

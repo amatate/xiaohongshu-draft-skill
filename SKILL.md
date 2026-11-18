@@ -1,11 +1,11 @@
 ---
 name: xiaohongshu-draft-skill
-description: Prepare and verify Xiaohongshu image-note drafts in a dedicated local browser, then hand control to the user for manual review and publication. Use when draft automation is explicitly requested; this skill does not publish notes or bypass AI labels, login checks, or CAPTCHAs.
+description: Prepare and verify Xiaohongshu image-note drafts in a dedicated local browser, then hand control to the user for manual review and publication. Use when draft automation is explicitly requested; draft mode does not publish; a separately authorized scheduling mode is experimental. Never bypass AI labels, login checks, or CAPTCHAs.
 ---
 
 # Xiaohongshu local drafts
 
-Produce a small batch of **verified local drafts**, not published notes. Read [operating notes](references/operating-notes.md) before live work; they explain the observed failures and verification limits.
+The default workflow produces a small batch of **verified local drafts**, not published notes. Scheduling is a separate explicitly authorized workflow; see the final section. Read [operating notes](references/operating-notes.md) before live work; they explain the observed failures and verification limits.
 
 ## Before modifying the platform
 
@@ -32,3 +32,7 @@ State exactly which items were saved, which were visually checked, whether topic
 Manual publication is for human review and control. It does **not** guarantee reduced AI detection or bypass platform policies. Preserve truthful AI disclosure in the body and the platform's “笔记含AI合成内容” declaration when applicable. Never disable that label to disguise AI-assisted work.
 
 The original guided workflow was exercised on the real site. This packaged v0.1 is tested against isolated mocked pages; its unattended live batch behavior has **not** been validated. Treat changed selectors/endpoints as a request to inspect the actual UI, not to invent a successful result.
+
+## Explicitly authorized scheduling
+
+When the user explicitly asks to schedule publication, read [the scheduling guide](references/scheduling.md) in full. This is a separate consequential command for existing drafts, not permission inferred from draft/upload requests. Preserve draft-only defaults. Validate locally, prepare and visually review, and only submit the specifically authorized account/content/time using `--reviewed`. Never claim success until Note Management confirms the title and time. Never retry uncertain intent or bypass the ledger. The reusable adapter is offline-tested, not live-batch accepted.

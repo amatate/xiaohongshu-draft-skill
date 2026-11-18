@@ -21,13 +21,19 @@ A local-first **Codex skill + Playwright CLI** for Xiaohongshu image-note drafts
 
 <p align="center"><a href="#quick-start">Quick start</a> · <a href="#the-workflow">Workflow</a> · <a href="#safety-by-design">Safety</a> · <a href="#verification">Verification</a></p>
 
+## Optional scheduled publishing
+
+New: an experimental, separately opted-in command for **existing drafts**. Default remains local validation; the original draft CLI still cannot publish. Scheduling requires explicit account/content/time authorization, image and management review, durable anti-retry intent, and final management-page verification.
+
+See the **[bilingual scheduling guide](references/scheduling.md)** for `validate`, `prepare`, and one-item `submit --reviewed`. Submit can really publish and deliberately has no draft-only network interception. The new adapter is offline-tested, not unattended live-batch certified.
+
 ## What it does
 
 | Prepare | Verify | Hand off |
 | --- | --- | --- |
 | One original image per note, checked by SHA-256 | Reopen the saved draft; check title, body, AI label and image count | Open the same local profile for the user |
 | Dedicated browser profile and private manifest | Capture evidence for visual image review | The user adds topics and decides whether to publish |
-| Record intent before uploading | Stop on uncertain history instead of blindly retrying | No automated Publish command |
+| Record intent before uploading | Stop on uncertain history instead of blindly retrying | Draft CLI: no Publish command; separate opt-in scheduling |
 
 **Not a hosted service, browser extension, or unattended publishing bot.** Topic automation is intentionally excluded in v0.1. The CLI itself does not generate artwork or copy.
 
@@ -117,7 +123,7 @@ Repeated runs reopen matching recorded drafts without uploading again. An uncert
 | --- | --- |
 | Unknown writes denied; known publication routes denied | `human-browser` has **no network interception** |
 | Publication-like buttons intercepted as defense in depth | Normal user controls are available |
-| No Publish command, stealth plugin or CAPTCHA solver | The user logs in, reviews and may publish personally |
+| Draft CLI has no Publish command, stealth plugin or CAPTCHA solver | The user logs in, reviews and may publish personally |
 | Stops on changed UI, failed checks or uncertain history | Login and draft visibility must be checked after restart |
 
 These controls are **not a sandbox for malicious pages or a guarantee against future site changes**. Inspect changed behavior; never broadly allow writes just to make a run succeed.
